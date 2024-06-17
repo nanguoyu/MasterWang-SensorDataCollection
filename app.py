@@ -8,7 +8,7 @@ app = Flask(__name__)
 mongo_uri = os.environ.get('MONGO_URI', 'mongodb://localhost:27017/')
 client = MongoClient(mongo_uri)
 db = client.sensor_data_db
-collection = db.sensor_data  # 使用一个统一的collection存储所有传感器数据
+collection = db.sensor_data  # Use one collection to store all sensor data
 
 @app.route('/', methods=['GET'])
 def hello_world():
@@ -19,7 +19,7 @@ def receive_data():
     data = request.json
     print("Received data:", data)
     
-    # 将数据保存到MongoDB
+
     collection.insert_one(data)
     
     return jsonify({"status": "success"})
@@ -27,7 +27,7 @@ def receive_data():
 @app.route('/stats', methods=['GET'])
 def stats():
     pipeline = [
-        {"$unwind": "$data"},  # 展开data数组
+        {"$unwind": "$data"},  
         {"$group": {"_id": "$label", "count": {"$sum": 1}}}
     ]
     results = collection.aggregate(pipeline)
