@@ -32,3 +32,6 @@ Then you can find collected data in [data](./data/)
 docker-compose down
 ```
 
+## Train a classification model
+
+You can use [Master_Wang_Model_Training.ipynb](./Master_Wang_Model_Training.ipynb) to try a simple CNN with pytorch and convert it to CoreML format.
